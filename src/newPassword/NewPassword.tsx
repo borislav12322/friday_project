@@ -18,7 +18,7 @@ export const NewPassword = ({userEmailAddress, emailStatus}: PropsType) => {
 
     const dispatch = useDispatch();
 
-    const mailText = `\n<div style=\"background-color: lime; padding: 15px\">\npassword recovery link: \n<a href='https://borislav12322.github.io/friday_project/#/newPassword/$token$'>link</a>\n</div>\n`
+    const mailText = `\n<div style=\"background-color: lime; padding: 15px\">\npassword recovery link: \n<a href='https://borislav12322.github.io/friday_project/#/resetPassword/$token$'>link</a>\n</div>\n`
 
     const {
         register,
