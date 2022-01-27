@@ -1,0 +1,87 @@
+@import 'normalize-css';
+
+@font-face {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    src: local('Poppins'), url('./assets/fonts/poppins/Poppins-SemiBold.ttf');
+    font-display: swap;
+}
+
+.list {
+    display: flex;
+    column-gap: 20px;
+}
+
+.App {
+    background: linear-gradient(180deg, #E6D4DE 0%, #9890C7 100%);
+    height: 100vh;
+}
+.authContainer{
+    display: flex;
+    justify-content: center;
+    padding-top: 60px;
+}
+.authBox{
+    max-width: 413px;
+    width: 100%;
+    padding: 25px 33px 26px;
+    background-color: #F9F9FE;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 8px;
+    position: relative;
+}
+
+
+.logoTitle{
+    font-family: 'Poppins', sans-serif;
+    margin-bottom: 32px;
+}
+
+.inputContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+.inputBox{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.inputBox:not(:last-child){
+    margin-bottom: 24px;
+}
+
+.errorText{
+    position: absolute;
+    bottom: -15px;
+    font-size: 10px;
+    color: red;
+}
+
+.inputForm{
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.input{
+    outline: none;
+    background-color: transparent;
+    width: 100%;
+    border: none;
+    border-bottom: 1px #24254A solid;
+    height: 28px;
+    /*opacity: 0.2;*/
+}
+
+.labelAuth{
+    font-size: 13px;
+    line-height: 20px;
+    color: #24254A;
+    opacity: 0.5;
+    position: relative;
+}
+
