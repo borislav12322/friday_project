@@ -41,9 +41,6 @@ export const Login = React.memo(({isShowPassword, changePasswordType, loadingSta
     return (
         <div className={'authContainer'}>
             <div className={'authBox'}>
-
-                {loadingStatus ? <LoadingComponent/> : null}
-
                 <h2 className={'logoTitle'}>It-incubator</h2>
                 <h3 className={'authTitle'} style={{marginBottom: '38px'}}>Sign In</h3>
                 <div className={'inputContainer'}>

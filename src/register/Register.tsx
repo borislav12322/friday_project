@@ -12,7 +12,7 @@ type PropsType = {
     loadingStatus: boolean
 }
 
-export const Register = ({loadingStatus}: PropsType) => {
+export const Register = React.memo(({loadingStatus}: PropsType) => {
 
     const dispatch = useDispatch();
 
@@ -40,7 +40,6 @@ export const Register = ({loadingStatus}: PropsType) => {
         <div className={'authContainer'}>
             <div className={'authBox'}>
 
-                {loadingStatus ? <LoadingComponent/> : null}
 
                 <h2 className={'logoTitle'}>It-incubator</h2>
                 <h3 className={'authTitle'} style={{marginBottom: '38px'}}>Sign Up</h3>
@@ -115,4 +114,4 @@ export const Register = ({loadingStatus}: PropsType) => {
             </div>
         </div>
     )
-}
+})

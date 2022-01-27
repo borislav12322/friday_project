@@ -1,5 +1,5 @@
 import {Dispatch} from "redux";
-import {setIsLoadingAC, SetIsLoadingACType} from "./app-reducer";
+import {setErrorAppAC, setIsLoadingAC, SetIsLoadingACType, setTextErrorAC, SetTextErrorACType} from "./app-reducer";
 import {authAPI} from "../api/authAPI";
 import {FieldValues} from "react-hook-form";
 
@@ -10,6 +10,7 @@ type InitialStateType = {
 type ActionsType =
     SetIsLoadingACType
     | SetIsLoggedACType
+    | SetTextErrorACType
 
 const initialState = {
     isLogged: false
@@ -46,8 +47,16 @@ export const loginTC = (loginValues: FieldValues) => (dispatch: Dispatch) => {
         })
         .catch(err => {
             console.log(err);
+            const errorText = err.response ? err.response.data.error : (err.message + 'more details in console');
+            dispatch(setErrorAppAC(true));
+            dispatch(setTextErrorAC(errorText));
+
+            dispatch(setErrorAppAC(true));
         }).finally(() => {
         dispatch(setIsLoadingAC(false));
+        setTimeout(() => {
+            dispatch(setErrorAppAC(false));
+        }, 15000)
     })
 }
 

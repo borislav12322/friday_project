@@ -1,27 +1,34 @@
 import React, {useEffect} from 'react';
 import './App.css';
-import {BrowserRouter, Routes, Route, NavLink, Navigate} from "react-router-dom";
+import {Routes, Route, NavLink, Navigate, HashRouter} from "react-router-dom";
 import {NotFoundPage} from "./404/404";
-import {NewPassword} from "./newPassword/NewPassword";
 import {Profile} from "./profile/Profile";
-import {ResetPassword} from "./resetPassword/ResetPassword";
 import {Test} from "./test/Test";
 import {LoginContainer} from "./login/LoginContainer";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {initializeAppTC} from "./redux/app-reducer";
 import {RegisterContainer} from "./register/RegisterContainer";
+import {ErrorComponent} from "./components/errorComponent/ErrorComponent";
+import {AppRootStateType} from "./redux/store";
+import {LoadingComponent} from "./components/loadingComponent/LoadingComponent";
+import {NewPasswordContainer} from "./newPassword/NewPasswordContainer";
+import {ResetPasswordContainer} from "./resetPassword/ResetPasswordContainer";
 
 function App() {
 
     const dispatch = useDispatch();
+    const errorStatus = useSelector<AppRootStateType, boolean>(state => state.appReducer.errorStatus);
+    const loadingStatus = useSelector<AppRootStateType, boolean>(state => state.appReducer.isLoading);
 
     // useEffect(() => {
     //     dispatch(initializeAppTC())
     // }, [])
 
     return (
-        <BrowserRouter>
+        <HashRouter>
             <div className="App">
+                {errorStatus ? <ErrorComponent/> : null}
+                {loadingStatus ? <LoadingComponent/> : null}
                 <ul className="list">
                     <li className="item">
                         <NavLink to={'/login'}>
@@ -63,14 +70,14 @@ function App() {
                     <Route path={'/login'} element={<LoginContainer/>}/>
                     <Route path={'/404'} element={<NotFoundPage/>}/>
                     <Route path={'*'} element={<Navigate to={'/404'}/>}/>
-                    <Route path={'/newPassword'} element={<NewPassword/>}/>
-                    <Route path={'/resetPassword'} element={<ResetPassword/>}/>
+                    <Route path={'/newPassword'} element={<NewPasswordContainer/>}/>
+                    <Route path={'/resetPassword/:token'} element={<ResetPasswordContainer/>}/>
                     <Route path={'/profile'} element={<Profile/>}/>
                     <Route path={'/register'} element={<RegisterContainer/>}/>
                     <Route path={'/test'} element={<Test/>}/>
                 </Routes>
             </div>
-        </BrowserRouter>
+        </HashRouter>
     );
 }
 

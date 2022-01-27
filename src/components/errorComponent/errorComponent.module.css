@@ -1,0 +1,18 @@
+.errorTextContainer{
+    position: absolute;
+    bottom: 5px;
+    transition: all 0.5s ease;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    color: #ba3939;
+    background: #ffe0e0;
+    border: 1px solid #a33a3a;
+    left: -100%;
+}
+
+.showContainer{
+    left: 5px;
+    transition: all 0.5s ease;
+}

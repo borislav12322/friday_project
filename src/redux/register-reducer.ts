@@ -47,3 +47,4 @@ export const registerTC = (registerValues: FieldValues) => (dispatch: Dispatch) 
         dispatch(setIsLoadingAC(false));
     })
 }
+

@@ -5,16 +5,22 @@ import {setIsLoggedAC, SetIsLoggedACType} from "./login-reducer";
 type InitialStateType = {
     isLoading: boolean
     status: boolean
+    errorStatus: boolean
+    errorText: string
 }
 
 type ActionsType =
     SetIsLoadingACType
     | SetIsLoggedACType
     | SetIsAppLoadingACType
+    | SetErrorAppACType
+    | SetTextErrorACType
 
 const initialState = {
     isLoading: false,
-    status: false
+    status: false,
+    errorStatus: false,
+    errorText: 'Something went wrong',
 }
 
 export const appReducer = (state: InitialStateType = initialState, action: ActionsType): InitialStateType => {
@@ -23,6 +29,16 @@ export const appReducer = (state: InitialStateType = initialState, action: Actio
             return {
                 ...state,
                 isLoading: action.isLoadingStatus
+            }
+        case "SET-ERROR":
+            return {
+                ...state,
+                errorStatus: action.errorStatus
+            }
+        case "SET-ERROR-TEXT":
+            return {
+                ...state,
+                errorText: action.errorText
             }
         default:
             return state
@@ -47,12 +63,44 @@ export const setIsAppLoadingAC = (isAppLoading: boolean) => {
     } as const
 }
 
+export type SetErrorAppACType = ReturnType<typeof setErrorAppAC>
+
+export const setErrorAppAC = (errorStatus: boolean) => {
+    return {
+        type: 'SET-ERROR',
+        errorStatus,
+    } as const
+}
+
+export type SetTextErrorACType = ReturnType<typeof setTextErrorAC>
+
+export const setTextErrorAC = (errorText: string) => {
+    return {
+        type: 'SET-ERROR-TEXT',
+        errorText,
+    } as const
+}
+
 export const initializeAppTC = () => (dispatch: Dispatch) => {
     dispatch(setIsLoadingAC(true));
     authAPI.authME()
         .then(res => {
-            console.log(res)
-            dispatch(setIsLoggedAC(true))
+            console.log(res);
+            dispatch(setIsLoggedAC(true));
+        })
+        .catch(err => {
+            console.log(err);
+            const error = err.response;
+            dispatch(setErrorAppAC(true));
+            dispatch(setTextErrorAC(error));
+            console.log(error)
+
+        })
+        .finally(() => {
+            setTimeout(() => {
+                dispatch(setErrorAppAC(false));
+            }, 15000)
+            dispatch(setIsLoadingAC(false));
         })
 
 }
