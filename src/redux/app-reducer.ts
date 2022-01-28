@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import {authAPI} from "../api/authAPI";
 import {setIsLoggedAC, SetIsLoggedACType} from "./login-reducer";
+import {getUserIDAC, GetUserIDACType} from "./table-reducer";
 
 type InitialStateType = {
     isLoading: boolean
@@ -15,6 +16,7 @@ type ActionsType =
     | SetIsAppLoadingACType
     | SetErrorAppACType
     | SetTextErrorACType
+    | GetUserIDACType
 
 const initialState = {
     isLoading: false,
@@ -86,20 +88,20 @@ export const initializeAppTC = () => (dispatch: Dispatch) => {
     authAPI.authME()
         .then(res => {
             console.log(res);
+            dispatch(getUserIDAC(res.data._id))
             dispatch(setIsLoggedAC(true));
         })
         .catch(err => {
             console.log(err);
             const error = err.response;
-            dispatch(setErrorAppAC(true));
+            // dispatch(setErrorAppAC(true));
             dispatch(setTextErrorAC(error));
             console.log(error)
-
         })
         .finally(() => {
-            setTimeout(() => {
-                dispatch(setErrorAppAC(false));
-            }, 15000)
+            // setTimeout(() => {
+            //     dispatch(setErrorAppAC(false));
+            // }, 15000)
             dispatch(setIsLoadingAC(false));
         })
 

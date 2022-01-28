@@ -19,9 +19,9 @@ export const LoginContainer = () => {
         setIsShowPassword(!isShowPassword);
     },[isShowPassword])
 
-    // if(isLogged){
-    //     return <Navigate to={'/profile'}/>
-    // }
+    if(isLogged){
+        return <Navigate to={'/profile'}/>
+    }
 
     return (
         <Login

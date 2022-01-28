@@ -86,3 +86,25 @@
     position: relative;
 }
 
+.menu{
+    width: 100%;
+    background-color: #EBE0E9;
+}
+
+.menuList{
+    display: flex;
+    justify-content: center;
+}
+
+.menuItem{
+    max-width: 173px;
+    width: 100%;
+}
+
+.menuListLink.active{
+    background: #DCCCDB;
+    border-bottom: 3px solid #21268F;
+
+}
+
+

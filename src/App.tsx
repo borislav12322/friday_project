@@ -13,6 +13,8 @@ import {AppRootStateType} from "./redux/store";
 import {LoadingComponent} from "./components/loadingComponent/LoadingComponent";
 import {NewPasswordContainer} from "./newPassword/NewPasswordContainer";
 import {ResetPasswordContainer} from "./resetPassword/ResetPasswordContainer";
+import {authAPI} from "./api/authAPI";
+import {PacksTableContainer} from "./tables/PacksTableContainer";
 
 function App() {
 
@@ -20,14 +22,21 @@ function App() {
     const errorStatus = useSelector<AppRootStateType, boolean>(state => state.appReducer.errorStatus);
     const loadingStatus = useSelector<AppRootStateType, boolean>(state => state.appReducer.isLoading);
 
-    // useEffect(() => {
-    //     dispatch(initializeAppTC())
-    // }, [])
+    useEffect(() => {
+        dispatch(initializeAppTC())
+    }, [])
+
+    useEffect(() => {
+        // authAPI.logout()
+        //     .then(res => {
+        //         console.log(res)
+        //     })
+    }, [])
 
     return (
         <HashRouter>
             <div className="App">
-                {errorStatus ? <ErrorComponent/> : null}
+                {/*{errorStatus ? <ErrorComponent/> : null}*/}
                 {loadingStatus ? <LoadingComponent/> : null}
                 <ul className="list">
                     <li className="item">
@@ -65,7 +74,26 @@ function App() {
                             Test
                         </NavLink>
                     </li>
+                    <li className="item">
+                        <NavLink to={'/packsTable'}>
+                            PacksTable
+                        </NavLink>
+                    </li>
                 </ul>
+                <nav className={'menu'}>
+                    <ul className={'menuList'}>
+                        <li className={'menuItem'}>
+                            <NavLink className={'menuListLink'} to={'/packsTable'}>
+                                Packs list
+                            </NavLink>
+                        </li>
+                        <li className={'menuItem'}>
+                            <NavLink className={'menuListLink'} to={'/profile'}>
+                                Profile
+                            </NavLink>
+                        </li>
+                    </ul>
+                </nav>
                 <Routes>
                     <Route path={'/login'} element={<LoginContainer/>}/>
                     <Route path={'/404'} element={<NotFoundPage/>}/>
@@ -75,6 +103,7 @@ function App() {
                     <Route path={'/profile'} element={<Profile/>}/>
                     <Route path={'/register'} element={<RegisterContainer/>}/>
                     <Route path={'/test'} element={<Test/>}/>
+                    <Route path={'/packsTable'} element={<PacksTableContainer/>}/>
                 </Routes>
             </div>
         </HashRouter>

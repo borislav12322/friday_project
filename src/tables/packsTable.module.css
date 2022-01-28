@@ -1,0 +1,20 @@
+.tableMenuList {
+
+}
+
+.tableMenuItem {
+    display: grid;
+    grid-template-columns: 185px 75px 135px 110px 150px;
+}
+
+.item {
+    word-wrap: break-word;
+}
+
+.btnContainer {
+    display: flex;
+}
+
+.btnBox {
+    display: flex;
+}

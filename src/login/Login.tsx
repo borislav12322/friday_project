@@ -49,7 +49,7 @@ export const Login = React.memo(({isShowPassword, changePasswordType, loadingSta
                             <label className={'labelAuth'}>
                                 Email
                             </label>
-                            <input defaultValue={'bizmestev@mail.ru'} className={'input'}
+                            <input className={'input'}
                                    type="email"
                                    {...register('email', {
                                        required: true,
@@ -67,7 +67,7 @@ export const Login = React.memo(({isShowPassword, changePasswordType, loadingSta
                             <label className={'labelAuth'}>
                                 Password
                             </label>
-                            <input defaultValue={'hapit123'} className={'input'}
+                            <input  className={'input'}
                                    type={isShowPassword ? 'text' : 'password'}
                                    {...register('password', {
                                        required: true,
